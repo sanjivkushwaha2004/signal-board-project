@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Signal Board</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar" role="banner">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    signal_board
+  </div>
+  <div class="topbar-sep" aria-hidden="true"></div>
+  <div class="search-wrap">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input
+      type="search"
+      id="search"
+      class="search-input"
+      placeholder="Search titles and summaries…"
+      aria-label="Search review items"
+      autocomplete="off"
+    />
+    <span class="search-kbd" aria-hidden="true">⌘K</span>
+  </div>
+  <div class="topbar-actions">
+    <button class="density-btn" id="density-toggle" aria-pressed="false" title="Toggle compact mode">
+      <span id="density-icon">☰</span>
+      <span id="density-label">compact</span>
+    </button>
+  </div>
+</header>
+
+<!-- BODY -->
+<div class="app-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Filters and sorting">
+    <div>
+      <div class="sidebar-section-label">Status</div>
+      <div class="filter-group" id="status-filters" role="group" aria-label="Filter by status">
+        <div class="filter-chip selected" data-filter="status" data-value="all" tabindex="0" role="button" aria-pressed="true">
+          All <span class="count" id="count-all">—</span>
+        </div>
+        <div class="filter-chip" data-filter="status" data-value="open" tabindex="0" role="button" aria-pressed="false">
+          Open <span class="count" id="count-open">—</span>
+        </div>
+        <div class="filter-chip" data-filter="status" data-value="in-review" tabindex="0" role="button" aria-pressed="false">
+          In review <span class="count" id="count-in-review">—</span>
+        </div>
+        <div class="filter-chip" data-filter="status" data-value="escalated" tabindex="0" role="button" aria-pressed="false">
+          Escalated <span class="count" id="count-escalated">—</span>
+        </div>
+        <div class="filter-chip" data-filter="status" data-value="reviewed" tabindex="0" role="button" aria-pressed="false">
+          Reviewed <span class="count" id="count-reviewed">—</span>
+        </div>
+        <div class="filter-chip" data-filter="status" data-value="snoozed" tabindex="0" role="button" aria-pressed="false">
+          Snoozed <span class="count" id="count-snoozed">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Priority</div>
+      <div class="filter-group" id="priority-filters" role="group" aria-label="Filter by priority">
+        <div class="filter-chip selected" data-filter="priority" data-value="all" tabindex="0" role="button" aria-pressed="true">
+          All <span class="count">—</span>
+        </div>
+        <div class="filter-chip" data-filter="priority" data-value="high" tabindex="0" role="button" aria-pressed="false">
+          High <span class="count" id="count-high">—</span>
+        </div>
+        <div class="filter-chip" data-filter="priority" data-value="medium" tabindex="0" role="button" aria-pressed="false">
+          Medium <span class="count" id="count-medium">—</span>
+        </div>
+        <div class="filter-chip" data-filter="priority" data-value="low" tabindex="0" role="button" aria-pressed="false">
+          Low <span class="count" id="count-low">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Source</div>
+      <select class="owner-select" id="source-filter" aria-label="Filter by source">
+        <option value="all">All sources</option>
+      </select>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Owner</div>
+      <select class="owner-select" id="owner-filter" aria-label="Filter by owner">
+        <option value="all">All owners</option>
+        <option value="unassigned">Unassigned only</option>
+      </select>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Sort by</div>
+      <select class="sort-select" id="sort-select" aria-label="Sort items">
+        <option value="score-desc">Score: High → Low</option>
+        <option value="score-asc">Score: Low → High</option>
+        <option value="date-desc">Newest first</option>
+        <option value="date-asc">Oldest first</option>
+        <option value="priority">Priority</option>
+      </select>
+    </div>
+
+    <button class="reset-btn" id="reset-btn" aria-label="Reset all filters">↺ reset filters</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" aria-label="Review queue">
+    <div class="queue-header">
+      <div class="queue-count" id="queue-count" aria-live="polite">Loading…</div>
+    </div>
+    <div class="queue-list" id="queue-list" role="list" aria-label="Review items"></div>
+  </main>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+
+<!-- DETAIL DRAWER -->
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Item detail" aria-hidden="true">
+  <div class="drawer-header">
+    <div class="drawer-title-row">
+      <h2 class="drawer-title" id="drawer-title">—</h2>
+      <button class="drawer-close" id="drawer-close" aria-label="Close detail panel">✕</button>
+    </div>
+    <div id="drawer-badges" style="display:flex; gap:6px; flex-wrap:wrap;"></div>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+  <div class="drawer-footer">
+    <span class="item-id" id="drawer-id"></span>
+    <div style="margin-left:auto; display:flex; gap:6px;">
+      <button class="nav-btn" id="nav-prev" aria-label="Previous item">‹</button>
+      <button class="nav-btn" id="nav-next" aria-label="Next item">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-wrap" id="toast-wrap" aria-live="polite" aria-atomic="true"></div>
+  <script src="index.js"></script>
+
+</body>
+</html>
