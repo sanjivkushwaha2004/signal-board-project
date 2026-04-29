@@ -6,8 +6,7 @@ A production-minded review queue for an AI-assisted product team. Reviewers can 
 
 ## Quick Start
 
-```bash
-# Clone / download the project, then:
+
 npx serve .
 # Open http://localhost:3000
 ```
