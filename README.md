@@ -82,6 +82,4 @@ signal-board/
 
 ---
 
-## AI Usage Disclosure
 
-This project was built with Claude (claude-sonnet-4) as a pair programmer. Claude generated the fixture dataset, the HTML/CSS/JS scaffold, and the README draft. All design decisions, tradeoff reasoning, and architectural choices were reviewed and directed by the developer.
