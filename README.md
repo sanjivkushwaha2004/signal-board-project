@@ -2,22 +2,6 @@
 
 A production-minded review queue for an AI-assisted product team. Reviewers can scan, filter, sort, and inspect incoming items quickly without backend infrastructure.
 
----
-
-## Quick Start
-
-
-npx serve .
-# Open http://localhost:3000
-```
-
-Or use any static file server:
-
-```bash
-python3 -m http.server 8080
-# Open http://localhost:8080
-```
-
 > **Important:** Open via a local server (not `file://`). The app fetches `./public/data/review-items.json` using `fetch()`, which requires HTTP.
 
 No install, no build step, no dependencies. Pure HTML + CSS + JS.
